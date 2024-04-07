@@ -1,0 +1,323 @@
+
+
+body
+{
+    background: #FF416C;
+    background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+    background: linear-gradient(to right, #FF4B2B, #FF416C);
+    font-family: "Poppins" sans-serif !important;
+}
+.nav-wrapper
+{
+    background-color: #FFFFFF !important;
+}
+.nav-wrapper ul a
+{
+    color: #FF4B2B !important;
+}
+.brand-logo
+{
+    left:20px !important;
+    bottom:2px !important;
+}
+.dropdown-content li a
+{
+    color: black !important;
+}
+.card 
+{
+    margin-top: 50px !important;
+    margin-left: 32% !important;
+      width: 35% !important;
+      height: 180px !important;
+      background-color: rgba(255, 255, 255, 0.1) !important;
+      /* Glass effect background color */
+      border-radius: 15px !important;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+      backdrop-filter: blur(5px) !important;
+      -webkit-backdrop-filter: blur(5px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.18) !important;
+}
+.card-header, .card-title
+{
+    text-align: center !important;
+    color: white !important;
+}
+.form
+{
+    margin-top: 10px !important;
+}
+
+.button,
+button {
+    background-color: transparent;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+
+.button:active,
+button:active {
+    transform: scale(0.95);
+}
+
+.button:focus,
+button:focus {
+    outline: none;
+}
+
+.button.ghost,
+button.ghost {
+    background-color: transparent;
+    border-color: #FFFFFF;
+}
+.button_group
+{
+    margin-right: 10px;
+}
+.button_group ul li
+{
+    margin-right: 5px;
+}
+.preview_container, .enhance_container, .hue_container, .filter_container,.crop_container,.my_images
+{
+    margin-top: 35px;
+    margin-left:23% !important;
+    height: 600px;
+    width: 800px;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: white;
+    text-align: center;
+    padding-top: 10px;
+}
+.enhance_container
+{
+    height: 400px;
+}
+.hue_container
+{
+    height: 180px;
+}
+.filter_container
+{
+    height: 140px;
+}
+.crop_container
+{
+    height: 530px;
+    margin-bottom: 10px;
+}
+.preview_container img
+{
+    margin-top: 15px;
+    border: transparent;
+    border-radius: 5px;
+}
+form
+{
+    input[type="range"]{
+        width:80%;
+
+    }
+}
+.enhance_button, .filter_buttons
+{
+    border-radius: 20px;
+    border: 1px solid #FF4B2B;
+    background-color: #FF4B2B;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    font-family:  'Roboto', sans-serif;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.enhance_button:active,
+.filter_buttons:active
+ {
+    transform: scale(0.95);
+}
+
+.enhance_button:focus,
+.filter_buttons:focus{
+    outline: none;
+}
+
+.enhance_button.ghost,
+.filter_buttons.ghost
+{
+    background-color: transparent;
+    border-color: #FFFFFF;
+}
+
+.filter_buttons
+{
+    display: inline;
+    margin-right: 30px;
+}
+.filter_button_container
+{
+    margin-left: 30px;
+}
+.success
+{
+    text-align: left;
+    padding: 10px;
+}
+.success h3
+{
+    text-align: center !important;
+}
+
+.form-inline
+{
+    display: flex !important;
+    align-items: center !important;
+}
+.form-group
+{
+    margin-bottom: 0 !important;
+}
+
+.form-control
+{
+    width: 650px !important;
+    border-radius: 5px !important;
+    border: 1px solid white !important;
+    background-color: #FFFFFF !important;
+    height: 34px !important;
+    margin-top: 9px !important;
+}
+input{
+    background-color: #eee !important;
+    border: none !important;
+    color: black !important;
+}
+input::placeholder
+{
+    padding: 2px;
+}
+input::target-text{
+    padding: 2px;
+}
+.form-control:focus
+{
+    background-color: #eee !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    color: white !important;
+}
+.btn
+{
+    border-radius: 5px !important;
+    border: 1px solid #FF4B2B !important;
+    background-color: #FF4B2B !important;
+    color: #FFFFFF !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    transition: transform 80ms ease-in !important;
+}
+.btn:active
+{
+    transform: scaler(0.95) !important;
+}
+.btn:focus
+{
+    outline: none !important;
+}
+.btn.ghost
+{
+    background-color: transparent !important;
+    border-color: #FFFFFF !important;
+}
+.resize
+{
+    margin-left: 5px !important;
+}
+.crop
+{
+
+     margin-left: 370px !important; 
+}
+.image_container
+{
+    display: inline !important;
+}
+.image_container img
+{
+    height: 200px !important;
+    width: 200px !important;
+    margin-left: 10px !important;
+    border-radius: 5px !important;
+}
+.my_images
+{
+    height: fit-content !important;
+    padding: 10px !important;
+    text-align: left !important;
+    margin-top: 50px !important;
+    margin-left: 25px !important;
+    width: fit-content !important;
+    width: 80% !important;
+    margin-right: 25px !important;
+}
+.my_images h3
+{
+    margin-left: 5px !important;
+}
+
+.modal-dialog {
+    height: 50%;
+    width: 50%;
+    margin: auto;
+}
+
+
+.modal-header {
+    color: white;
+    background-color: #007bff;
+}
+
+textarea {
+    border: none;
+    box-shadow: none !important;
+    -webkit-appearance: none;
+    outline: 0px !important;
+}
+
+.openmodal {
+    margin-left: 35%;
+    width: 25%;
+    margin-top: 25%;
+}
+
+.icon1 {
+    color: #007bff;
+
+}
+
+a {
+    margin: auto;
+}
+
+input {
+    color: #007bff;
+
+
+}

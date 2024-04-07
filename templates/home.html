@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/home_style.css')}}">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <style>
+        .card-image img {
+            width: 100%;
+            height: 100%;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #fff; /* Black footer background */
+            color: black; /* White text color */
+            text-align: center;
+            padding: 10px 0; /* Add padding to top and bottom */
+        }
+                .delete_button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            cursor: pointer;
+            display: none; /* Initially hidden */
+        }
+        .image_container:hover .delete_button {
+            display: block; /* Show delete button on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo"><img src="{{url_for('static',filename='images/logo2.png')}}" alt=""></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#">Feedback</a></li>
+                <li>
+                    <a class="dropdown-trigger" href="#!" data-target="profile-dropdown">Profile</a>
+                    <ul id="profile-dropdown" class="dropdown-content">
+                        <li><a href="#!">{{ session['name'] }}</a></li>
+                        <li><a href="#!">{{ session['email'] }}</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{url_for('logout')}}">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<div class="card">
+    <h5 class="card-header">Upload the Image</h5>
+    <div class="card-body">
+        <h5 class="card-title">Enter into the Editing World!!</h5>
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="input-group" style="font-size: 0.9rem">
+                            <div class="input-group-prepend">
+                                <button type="submit" name="submit_button" value="upload_image" class="btn btn-block btn-dark"
+                                    style="font-size: 0.9rem"><b>Upload</b></button>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFile" name="file">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
+                    
+                    </form>
+    </div>
+</div>
+<div class="my_images">
+    <form method="POST">
+    <h3>My Works</h3>
+    <hr>
+    {% for image_url in image_urls %}
+    <div class="image_container">
+        <img src="{{image_url}}" alt="">
+    </div>
+    {% endfor %}
+    </form>
+</div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(elems, {
+                coverTrigger: false,
+                constrainWidth: false // Adjust width to fit content
+            });
+        });
+    </script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+    <footer>
+        Designed and Developed by Sai Nikhil &copy; 2024
+    </footer>
+
+</html>

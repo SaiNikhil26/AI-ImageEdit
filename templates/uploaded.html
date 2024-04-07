@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{url_for('static',filename='CSS/home_style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.min.css">
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+    <title>AI Image Edit</title>
+    <style>
+footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #fff; /* Black footer background */
+            color: black; /* White text color */
+            text-align: center;
+            padding: 10px 0; /* Add padding to top and bottom */
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <div class="nav-wrapper">
+        <a href="{{ url_for('home') }}" class="brand-logo"><img
+                src="{{ url_for('static', filename='images/logo2.png') }}" alt=""></a>
+        <div class="button_group">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <form method="POST">
+                <li><button type="submit" class="waves-effect waves-light btn" name="home_button" value="home">Home</button></li>
+                <li><button type="submit" class="waves-effect waves-light btn" name="original_button" value="original">Original</button></li>
+                <li><button type="submit" class="waves-effect waves-light btn" name="download_button" value="download">Save</button></li>
+                </form>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container" id="align" style="height: 15%"></div>
+<div class="preview_container">
+    <h3>Preview</h3>
+    <hr>
+    {% if filename %}
+    <div><img src="{{url_for('static',filename=filename)}}" alt="Uploaded Image" style="height: 400px; width: 600px;"></div>
+    {% else %}
+    <div><h3>No Image Uploaded</h3></div>
+    {% endif %}
+</div>
+<div class="enhance_container">
+    <h3>Simple Enhance</h3>
+    <hr>
+    <form method="POST">
+        <h5>Color</h5>
+                            <input type="range" min="0" max="3" step="0.1" value="{{ slider['color'] }}" id="color" name="color"
+                                onchange="updateTextInput('color_value', this.value);">
+                                <span id="color_value">{{ slider['color'] }}</span>
+        <h5>Brightness</h5>
+            <input type="range" min="0" max="3" step="0.1"  value="{{slider['bright']}}" id="brightness" name="bright" onchange="updateTextInput('brightness_value',this.value)">
+        <span id="brightness_value">{{ slider['bright'] }}</span>
+        <h5>Sharpness</h5>
+            <input type="range" min="0" max="3" step="0.1" value="{{slider['sharp']}}"  id="sharpness" name="sharp"
+            onchange="updateTextInput('sharpness_value',this.value);">
+            <span id="sharpness_value">{{ slider['sharp'] }}</span>
+        <h5>Contrast</h5>
+        <input type="range" id="contrast" min="0" max="3" step="0.1" value="{{slider['contrast']}}"
+             name="contrast" onchange="updateTextInput('contrast_value',this.value);">
+        <span id="contrast_value">{{ slider['contrast'] }}</span>
+        <br>
+                <button type="submit" name="enhance_button" value="enhance" class="enhance_button"><b>Apply</b></button>
+    </form>
+</div>
+<div class="hue_container">
+    <h3>Hue</h3>
+    <hr>
+    <form method="POST">
+    <input type="range" min="-180" max="180" step="1" value="0" id="hue_angle" name="hue_angle" onchange="updateTextInput('hue_value',this.value); updateColorValues('domain_colors',this.value);">
+    <span id="hue_value">0</span>
+    <br>
+    <button type="submit" name="hue_button" value="hue" class="enhance_button"><b>Apply</b></button>
+    </form>
+</div>
+<div class="filter_container">
+    <h3>Apply Filters</h3>
+    <hr>
+    <form method="POST">
+    <div class="filter_button_container">
+        <button type="submit" name="blur_button" value="2" class="filter_buttons">Blur</button>
+        <button type="submit" name="sharpen_button" value="2" class="filter_buttons">Sharpen</button>
+        <button type="submit" name="edge_button" value="2" class="filter_buttons">Edge Enhance</button>
+        <button type="submit" name="smoothen_button" value="2" class="filter_buttons">Smoothen</button>
+    </div>
+    </form>
+</div>
+<div class="crop_container">
+    <div class="success">
+        <h3>Crop | Rotate | Resize</h3>
+        <hr>
+        {% if filename %}
+        <h5 style="display: inline-block;">Image Size:</h5>&nbsp;<span style="display: inline-block;">({{ width }}px, {{
+            height }}px)</span>
+        {% else %}
+        <p>No Image Loaded!</p>
+        {% endif %}
+    </div>
+<form class="form-inline" method="POST">
+    <div class="form-group mx-sm-3 mb-2">
+        <input type="text" class="form-control" placeholder="Enter Angle" name="angle">
+    </div>
+    <button type="submit" class="btn btn-primary mb-2" name="rotate_button" value="rotate">Rotate</button>
+</form>
+<div>
+    <form class="form-inline" method="POST">
+        <div class="form-group mx-sm-3 mb-2"  style="width: 650px;">
+            <input type="text" class="form-control" placeholder="Enter  Width" name="width">
+            <input type="text" class="form-control" placeholder="Enter height" name="height">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2 resize" name="resize_button" value="resize">Resize</button>
+    </form>
+</div>
+<div>
+    {% if filename %}
+    <img src="{{url_for('static',filename=filename)}}" alt="" style="height: 100px; width: 100px;" id="image">
+    {% else %}
+    <p>Please load an image to crop or rotate.</p>
+    {% endif %}
+    <form method="POST" class="form-inline">
+        <div class="form-group mx-sm-3 mb-2" style="width: 650px;">
+            <input type="text" id="start_x" style="display: none;" name="start_x">
+            <input type="text" id="start_y" style="display: none;" name="start_y">
+        </div>
+        <div class="form-group mx-sm-3 mb-2" style="width: 650px;">
+            <input type="text" id="end_x" style="display: none;" name="end_x">
+            <input type="text" id="end_y" style="display: none;" name="end_y">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2 crop" name="crop_button" value="crop">Crop</button>
+    </form>
+</div>
+</div>
+<script>
+    function updateTextInput(id,val){
+        element = document.getElementById(id)
+        element.innerHTML = val;
+    }
+    updateTextInput('color_value',{{slider['color']}});
+    updateTextInput('brightness_value',{{slider['bright']}});
+    updateTextInput('sharpness_value',{{slider['sharp']}})
+    updateTextInput('contrast_value',{{slider['contrast']}})
+</script>
+    <script>
+        function updateColorValues(id, val) {
+            parent = document.getElementById(id);
+            var i;
+
+            for (i = 0; i < 5; i++)
+                parent.children[i].style.filter = 'hue-rotate(' + val + 'deg)';
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.min.js"></script>
+    <script>
+        var image = document.getElementById('image')
+        var cropper = new Cropper(image,
+        {
+            viewMode:2,
+            background:false,
+            backgroundColor:'transparent',
+            movable:false,
+            zoomable:false,
+            rotatable:false,
+            strict:true,
+            ContainerWidth:100,
+            ContainerHeight:125,
+            crop(event){
+                document.getElementById("start_x").value = Math.round(event.detail.x);
+                document.getElementById("start_y").value = Math.round(event.detail.y);
+                document.getElementById("end_x").value = Math.round(event.detail.x+event.detail.width);
+                document.getElementById("end_y").value = Math.round(event.detail.y+event.detail.height);
+            }
+        })
+    </script>
+    <footer>
+        Designed and Developed by Sai Nikhil &copy; 2024
+    </footer>
+</body>
+</html>
